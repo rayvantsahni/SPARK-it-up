@@ -8,3 +8,6 @@ fileRDD = sc.textFile(file_path)
 
 # Check the type of fileRDD
 print("The file type of fileRDD is", type(fileRDD))
+
+# Check the number of partitions in fileRDD
+print("Number of partitions in fileRDD is", fileRDD.getNumPartitions())
