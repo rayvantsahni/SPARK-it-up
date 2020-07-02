@@ -1,62 +1,35 @@
-# Databricks notebook source
-data = sc.textFile("/FileStore/tables/ai_ml_security_book.txt")
+# WORD COUNT PROBLEM
 
-# COMMAND ----------
-
+# importing data
+data = sc.textFile("/FileStore/tables/ai_ml_security_book.txt") 
 data.take(15)
 
-# COMMAND ----------
 
+# splitting and changing the records to lower case
 data_split = data.flatMap(lambda a: a.lower().split(" "))
-
-# COMMAND ----------
-
 data_split.take(10)
-
-# COMMAND ----------
-
 data_split.count()
 
-# COMMAND ----------
 
+# converting the split records into key-value pair
 data_split_with_values = data_split.map(lambda w: (w, 1))
-
-# COMMAND ----------
-
 data_split_with_values.take(50)
 
-# COMMAND ----------
 
+# adding all the values for a key
 result_rdd = data_split_with_values.reduceByKey(lambda a,b: a+b)
-
-# COMMAND ----------
-
 result_rdd.take(20)
 
-# COMMAND ----------
 
+# swapping the key-value for each record
 result_rdd_swap = result_rdd.map(lambda a: (a[1], a[0]))
-
-# COMMAND ----------
-
 result_rdd_swap.take(10)
 
-# COMMAND ----------
 
+# sorting into acsending order of occurences
 result_rdd_swap_sort_asc = result_rdd_swap.sortByKey()
-
-# COMMAND ----------
-
 result_rdd_swap_sort_asc.take(15)
 
-# COMMAND ----------
-
+# sorting into descending order of occurences
 result_rdd_swap_sort_des = result_rdd_swap.sortByKey(ascending = False)
-
-# COMMAND ----------
-
 result_rdd_swap_sort_des.take(15)
-
-# COMMAND ----------
-
-
