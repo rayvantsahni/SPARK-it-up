@@ -1,4 +1,4 @@
-# Review of functional programming in Python
+# Functional Programming concepts in Python
 
 * Use of lambda() with map()
 
